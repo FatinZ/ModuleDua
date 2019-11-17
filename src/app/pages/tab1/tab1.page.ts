@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-import { NavigationExtras } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -30,7 +30,7 @@ export class Tab1Page implements OnInit {
     }
   ]
 
-  constructor(private toast: ToastController) { }
+  constructor(private toast: ToastController, private router: Router) { }
 
   ngOnInit() {
   }
@@ -49,15 +49,14 @@ export class Tab1Page implements OnInit {
     toast.present();
   }
 
-  // submit(item, id){
-  //   this.item = this.data.findIndex(id)
-  //   console.log("Data bag", item);
-  //   console.log("Data id", id);
-  //   let navigationExtras: NavigationExtras = {
-  //     state: {
-  //       item: item 
-      
-    
-  
+   submit(id){
+     console.log("This data", this.data[id])
 
+     let NavigationExtras: NavigationExtras = {
+       state: {
+         data: this.data[id]
+       }
+     }
+     this.router.navigate(['view'], NavigationExtras);
+   }
 }
